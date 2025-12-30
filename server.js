@@ -94,19 +94,18 @@ app.get("/", (req, res) => {
   `);
 });
 
-// Download route
 app.get("/download", (req, res) => {
-  const roll = req.query.roll.trim().toUpperCase();
-  const filePath = path.join(CERT_FOLDER, roll + ".pdf");
 
-  if (!fs.existsSync(filePath)) {
-    return res.send(`
-      <script>
-        alert("Certificate not found. Please check your Roll Number.");
-        window.location.href = "/";
-      </script>
-    `);
-  }
+  //  STOP DOWNLOADS (TEMPORARY / PERMANENT)
+  return res.send(`
+    <script>
+      alert("Certificate download period has ended. Please contact the coordinator (Sri. Dasaradha Arangi).");
+      window.location.href = "/";
+    </script>
+  `);
+
+  // ---- OLD CODE BELOW (WILL NOT RUN) ----
+
 
   res.download(filePath);
 });
